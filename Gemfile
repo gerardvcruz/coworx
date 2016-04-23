@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.2'
 gem 'rails-api'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
 
 gem 'devise_token_auth'
+gem 'omniauth'
 
 gem 'friendly_id', '~> 5.1.0'
 
