@@ -4,6 +4,7 @@ class Space < ActiveRecord::Base
   belongs_to :client
   has_many :space_users
   has_many :users, through: :space_users
+  has_many :plans
   has_many :rooms
   has_many :reservations
   has_many :invoices

@@ -1,5 +1,5 @@
 module V1
-  class PlansController
+  class PlansController < ResourcesController
 
     private
       def plan_params
