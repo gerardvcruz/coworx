@@ -6,7 +6,7 @@ gem 'rails-api'
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
 
-gem 'devise'
+gem 'devise_token_auth'
 
 gem 'friendly_id', '~> 5.1.0'
 
