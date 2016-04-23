@@ -58,6 +58,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_token_auth (0.1.37)
+      devise (> 3.5.2, < 4.1)
+      rails (< 6)
     erubis (2.7.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
@@ -148,7 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano-rails
-  devise
+  devise_token_auth
   friendly_id (~> 5.1.0)
   jbuilder (~> 2.0)
   pg

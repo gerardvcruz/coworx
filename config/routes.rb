@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :invoices
     resources :payments
 
+    resources :users, except: :destroy
 
     resources :space_users
   end

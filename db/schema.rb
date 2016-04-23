@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423085900) do
+ActiveRecord::Schema.define(version: 20160423105031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 20160423085900) do
   end
 
   add_index "rooms", ["slug"], name: "index_rooms_on_slug", unique: true, using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "space_id"
+    t.integer  "client_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "space_users", force: :cascade do |t|
     t.integer  "space_id"
