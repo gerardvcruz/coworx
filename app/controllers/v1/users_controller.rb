@@ -2,7 +2,6 @@ module V1
   class UsersController < ResourcesController
 
   	def active
-  		binding.pry
   		if params[:client_id]
   			@client = Client.find(params[:client_id])
   			@active_users = []

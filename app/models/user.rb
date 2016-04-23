@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_one  :plan
 
   def active_now?
-    self.sessions.order(:start).last.active?
+    if @session = self.sessions.order(:start).last
+      @session.active?
+    end
   end
 end
