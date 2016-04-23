@@ -7,11 +7,15 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
-   belongs_to :client
-   has_many :spaces, through: :space_users
-   has_many :reservations
-   has_many :plans
-   has_many :invoices
-   has_many :payments
-   has_many :sessions
+  belongs_to :client
+  has_many :spaces, through: :space_users
+  has_many :reservations
+  has_many :plans
+  has_many :invoices
+  has_many :payments
+  has_many :sessions
+
+  def active_now?
+    self.sessions.order(:start).last.active?
+  end
 end
