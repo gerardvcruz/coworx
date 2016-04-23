@@ -20,7 +20,8 @@ Rails.application.routes.draw do
 
     resources :space_users
 
-    resources :sessions
+    post 'sessions/checkin' => 'sessions#checkin'
+    post 'sessions/checkout' => 'sessions#checkout'
   end
 
 end
