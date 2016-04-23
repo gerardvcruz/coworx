@@ -6,4 +6,8 @@ class Session < ActiveRecord::Base
   def create_session user
 
   end
+
+  def active?
+  	self.active
+  end
 end

@@ -16,12 +16,15 @@ Rails.application.routes.draw do
     resources :invoices
     resources :payments
 
+    get 'users/active' => 'users#active'
+    
     resources :users, except: :destroy
 
     resources :space_users
 
     post 'sessions/checkin' => 'sessions#checkin'
     post 'sessions/checkout' => 'sessions#checkout'
+
   end
 
 end
