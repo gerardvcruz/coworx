@@ -1,13 +1,11 @@
 class User < ActiveRecord::Base
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
-  include DeviseTokenAuth::Concerns::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :recoverable,
+         :trackable, :validatable, :registerable,
+         :omniauthable
+
+  include DeviseTokenAuth::Concerns::User
 
    belongs_to :client
    has_many :spaces, through: :space_users
