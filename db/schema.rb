@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423063955) do
+ActiveRecord::Schema.define(version: 20160423085900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,72 @@ ActiveRecord::Schema.define(version: 20160423063955) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.datetime "paid_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.datetime "paid_at"
+    t.integer  "invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.integer  "user_id"
+    t.integer  "pricing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pricings", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.string   "name"
+    t.decimal  "price"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pricings", ["slug"], name: "index_pricings_on_slug", unique: true, using: :btree
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.integer  "room_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "space_id"
+    t.json     "info"
+    t.json     "settings"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rooms", ["slug"], name: "index_rooms_on_slug", unique: true, using: :btree
 
   create_table "space_users", force: :cascade do |t|
     t.integer  "space_id"

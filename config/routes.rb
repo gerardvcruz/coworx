@@ -6,6 +6,17 @@ Rails.application.routes.draw do
 
     resources :spaces
 
+    resources :rooms
+
+    resources :reservations
+
+    resources :plans
+    resources :pricings
+
+    resources :invoices
+    resources :payments
+
+
     resources :space_users
   end
 
