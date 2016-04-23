@@ -2,7 +2,7 @@ module V1
   class ResourcesController < ApplicationController
     before_action :set_resource, only: [:destroy, :show, :update]
 
-    load_and_authorize_resource
+    # load_and_authorize_resource
 
     # CREATE
     # POST /v1/{plural_resource_name}
