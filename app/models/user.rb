@@ -13,5 +13,5 @@ class User < ActiveRecord::Base
    has_many :plans
    has_many :invoices
    has_many :payments
-
+   has_many :sessions
 end
