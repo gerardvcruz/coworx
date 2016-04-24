@@ -61,12 +61,10 @@ class Payment
       }.to_json
     end
 
-    def generate_info
+    def create_payment_link
       response = RestClient.post @endpoint, build_payload, build_auth_headers
       if response.net_http_res.code == "200"
-        @invoice.info['payment_link'] = JSON.parse(response.body)['redirectUrl']
-        @invoice.info['checkout_id']  = JSON.parse(response.body)['checkoutId']
-        @invoice.save
+        return JSON.parse(response.body)['redirectUrl']
       end
     end
   end

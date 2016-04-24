@@ -9,7 +9,6 @@ class Invoice < ActiveRecord::Base
   	if self.info.blank?
   		self.info = {}
   	end
-
-  	Payment::Paymaya.new(self).generate_info
+    self.info['payment_link'] =  Payment::Paymaya.new(self).create_payment_link
   end
 end
