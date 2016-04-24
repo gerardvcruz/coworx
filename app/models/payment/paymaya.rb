@@ -52,19 +52,21 @@ class Payment
           }
         }],
         "redirectUrl": {
-          "success": "http://localhost:3000/v1/payment/success?id=#{@invoice.id}",
-          "failure": "http://localhost:3000/v1/payment/failure?id=#{@invoice.id}",
-          "cancel": "http://localhost:3000/v1/payment/cancel?id=#{@invoice.id}"
+          "success": "http://localhost:3000/v1/invoice/#{@invoice.id}",
+          "failure": "http://localhost:3000/v1/invoice/#{@invoice.id}",
+          "cancel": "http://localhost:3000/v1/invoice/#{@invoice.id}"
         },
         "requestReferenceNumber": "INV-0#{@invoice.id}",
         "metadata": {}
       }.to_json
     end
 
-    def link
+    def generate_info
       response = RestClient.post @endpoint, build_payload, build_auth_headers
       if response.net_http_res.code == "200"
-        return JSON.parse(response.body)['redirectUrl']
+        @invoice.info['payment_link'] = JSON.parse(response.body)['redirectUrl']
+        @invoice.info['checkout_id']  = JSON.parse(response.body)['checkoutId']
+        @invoice.save
       end
     end
   end

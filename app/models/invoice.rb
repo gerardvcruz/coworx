@@ -10,6 +10,6 @@ class Invoice < ActiveRecord::Base
   		self.info = {}
   	end
 
-  	self.info['payment_link'] = Payment::Paymaya.new(self).link
+  	Payment::Paymaya.new(self).generate_info
   end
 end
