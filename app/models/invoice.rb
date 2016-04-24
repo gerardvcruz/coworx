@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :space
   belongs_to :user
 
-	after_create :create_payment_link
+	before_save :create_payment_link
 
   def create_payment_link
   	if self.info.blank?
