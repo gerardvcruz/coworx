@@ -7,7 +7,9 @@ module V1
   			@active_users = []
   			@client.users.each do |user|
   				if user.active_now?
-  					@active_users << user
+            _user = user.attributes
+            _user['spaces'] = user.spaces
+  					@active_users << _user
   				end
   			end
 
