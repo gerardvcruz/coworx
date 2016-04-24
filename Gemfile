@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'rest-client'
 
 gem 'friendly_id', '~> 5.1.0'
 

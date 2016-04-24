@@ -3,7 +3,13 @@ class Invoice < ActiveRecord::Base
   belongs_to :space
   belongs_to :user
 
-  def pay
-  	Payment::PayMaya.new(self)
+	after_create :create_payment_link
+
+  def create_payment_link
+  	if self.info.blank?
+  		self.info = {}
+  	end
+
+  	self.info['payment_link'] = Payment::Paymaya.new(self).link
   end
 end

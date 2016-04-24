@@ -3,6 +3,7 @@ class Pricing < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :space
+  has_many   :plans
 
   friendly_id :name, use: :slugged
 end

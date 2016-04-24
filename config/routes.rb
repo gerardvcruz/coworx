@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :plans
     resources :pricings
-
+    
     resources :invoices
     resources :payments
 
@@ -24,7 +24,5 @@ Rails.application.routes.draw do
 
     post 'sessions/checkin' => 'sessions#checkin'
     post 'sessions/checkout' => 'sessions#checkout'
-
   end
-
 end

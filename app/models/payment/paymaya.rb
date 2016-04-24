@@ -1,7 +1,6 @@
 class Payment
-  class PayMaya
+  class Paymaya
     require 'base64'
-    require 'rest_client'
 
     attr_accessor :public_key, :secret, :invoice, :user
     attr_accessor :buyer, :items, :redirect_url
@@ -19,21 +18,21 @@ class Payment
     def build_auth_headers
       @combined_secret = "#{@public_key}:"
       @headers = {
-        'Content-Type' : 'application/json'
-        'Authorization': "Basic #{Base64.encode64(@combined_secret)}"
-      }
+        "Content-Type": "application/json",
+        "Authorization": "Basic #{Base64.strict_encode64("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN:")}"
+      }.as_json
     end
 
     def build_payload
       @payload = {
-        "totalAmount" : {
-          "value":"#{@invoice.amount}",
+        "totalAmount": {
+          "value": "#{sprintf('%.2f', @invoice.amount)}",
           "currency":"PHP"
         },
-        "buyer" : { 
+        "buyer": { 
           "firstName": "#{@user.name}",
           "lastName": "#{@user.nickname}",
-          "contact" : {
+          "contact": {
              "email": "#{@user.email}"
           },
           "shippingAddress": {
@@ -45,13 +44,13 @@ class Payment
           },
           "ipAddress": "125.60.148.241"
         },
-        "items" : {
+        "items": [{
           "name": "#{@plan.pricing.name}",
           "quantity": "1",
           "totalAmount": {
-            "value": "#{@plan.pricing.price}"
+            "value": "#{sprintf('%.1f', @plan.pricing.price)}"
           }
-        },
+        }],
         "redirectUrl": {
           "success": "http://localhost:3000/v1/payment/success?id=#{@invoice.id}",
           "failure": "http://localhost:3000/v1/payment/failure?id=#{@invoice.id}",
@@ -59,13 +58,13 @@ class Payment
         },
         "requestReferenceNumber": "INV-0#{@invoice.id}",
         "metadata": {}
-      }
+      }.to_json
     end
 
-    def send_paymaya_request
+    def link
       response = RestClient.post @endpoint, build_payload, build_auth_headers
-      if response.success?
-        redirect_to response.body[:redirectUrl]
+      if response.net_http_res.code == "200"
+        return JSON.parse(response.body)['redirectUrl']
       end
     end
   end
