@@ -21,6 +21,9 @@ Rails.application.configure do
 
 
   config.allowed_origin = '*'
+  config.paymaya_public = 'pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN'
+  config.paymaya_secret = 'sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q'
+  config.paymaya_endpoint = 'https://pg-sandbox.paymaya.com/checkout/v1/checkouts'
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
